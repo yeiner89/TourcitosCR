@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>tourcitosCR — Comunidad 4x4 & Aventura</title>
+  <meta name="description" content="tourcitosCR es una comunidad 4x4 en Costa Rica. Organizamos viajes off-road, camping y rutas épicas por montaña y playa." />
+  <meta property="og:title" content="tourcitosCR — Comunidad 4x4 & Aventura" />
+  <meta property="og:description" content="Únete a los rides, explora rutas off-road y vive la aventura con tourcitosCR." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?q=80&w=1600&auto=format&fit=crop" />
+  <meta name="theme-color" content="#0b1d14" />
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Urbanist:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #06110c;
+      --bg-soft: #0b1d14;
+      --card: #0f1f18;
+      --text: #eef5f1;
+      --muted: #b7c8bf;
+      --brand: #22c55e; /* verde trail */
+      --brand-2: #06b6d4; /* turquesa */
+      --accent: #f59e0b; /* ámbar */
+      --danger: #ef4444;
+      --ring: rgba(34,197,94,.35);
+      --glass: rgba(255, 255, 255, 0.06);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+    [data-theme="light"]{
+      --bg: #f6faf7; 
+      --bg-soft: #ffffff;
+      --card: #ffffff;
+      --text: #0d1511;
+      --muted: #41564b;
+      --glass: rgba(0,0,0,.04);
+      --shadow: 0 10px 30px rgba(16,24,20,.1);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: 'Outfit', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+      color: var(--text); background: radial-gradient(1200px 700px at 80% -10%, rgba(34,197,94,.08), transparent 50%),
+                radial-gradient(900px 600px at -10% 20%, rgba(6,182,212,.10), transparent 60%), var(--bg);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(1200px, 92%); margin: 0 auto; }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(10px);
+      background: var(--glass); border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .5px; }
+    .brand .logo {
+      width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; 
+      background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: var(--shadow);
+    }
+    .brand span { font-family: 'Urbanist', sans-serif; font-size: 1.15rem; }
+    .menu { display: flex; gap: 22px; align-items: center; }
+    .menu a { color: var(--muted); font-weight: 500; }
+    .menu a:hover { color: var(--text); }
+    .btn, button.btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px; border-radius: 999px; border: 1px solid transparent; cursor: pointer; font-weight: 700; letter-spacing: .2px; }
+    .btn.primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #04120c; }
+    .btn.primary:hover { filter: brightness(1.05); }
+    .btn.ghost { border-color: rgba(255,255,255,.15); background: var(--glass); color: var(--text); }
+    .btn.ghost:hover { border-color: rgba(255,255,255,.3); }
+    .menu-toggle { display: none; }
+
+    @media (max-width: 880px){
+      .menu { position: fixed; inset: 60px 16px auto 16px; background: var(--bg-soft); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 16px; flex-direction: column; gap: 8px; box-shadow: var(--shadow); display: none; }
+      .menu.open { display: flex; }
+      .menu-toggle { display: inline-flex; }
+      .nav-inner { padding: 10px 0; }
+    }
+
+    /* Hero */
+    .hero { position: relative; overflow: clip; }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; background:
+        radial-gradient(800px 400px at 20% -10%, rgba(245,158,11,.15), transparent 40%),
+        radial-gradient(1000px 500px at 110% 20%, rgba(34,197,94,.12), transparent 50%),
+        url('https://images.unsplash.com/photo-1520975922132-0d5241bb2a25?q=80&w=2060&auto=format&fit=crop');
+      background-size: cover; background-position: center; filter: brightness(.6) contrast(1.02) saturate(1.1);
+    }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(6,17,12,.8), rgba(6,17,12,.2)); }
+    .hero-content { position: relative; padding: clamp(72px, 12vw, 140px) 0 clamp(40px, 8vw, 80px); }
+    .eyebrow { text-transform: uppercase; color: var(--brand-2); font-weight: 800; letter-spacing: .18em; font-size: .85rem; }
+    .title { font-family: 'Urbanist', sans-serif; font-weight: 800; line-height: 1.05; font-size: clamp(2.2rem, 6vw, 4rem); margin: 10px 0; }
+    .subtitle { max-width: 800px; color: var(--muted); font-size: clamp(1rem, 2.2vw, 1.15rem); }
+    .hero-cta { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 28px; }
+    .stat { background: var(--glass); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 18px; text-align: center; }
+    .stat strong { display: block; font-size: clamp(1.4rem, 3.2vw, 1.8rem); }
+    .stat span { color: var(--muted); font-weight: 600; font-size: .95rem; }
+    @media (max-width: 700px){ .stats { grid-template-columns: 1fr; } }
+
+    /* Section base */
+    section { padding: clamp(48px, 8vw, 90px) 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+    .section-title { font-family: 'Urbanist', sans-serif; font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; }
+    .section-desc { color: var(--muted); max-width: 780px; }
+
+    /* Cards */
+    .grid { display: grid; gap: 18px; }
+    .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 940px){ .grid.cols-3, .grid.cols-4 { grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 640px){ .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr;} }
+
+    .card { background: linear-gradient(180deg, var(--card), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.08); border-radius: calc(var(--radius) + 4px); overflow: hidden; box-shadow: var(--shadow); }
+    .card-media { aspect-ratio: 16/9; background: #101e18; position: relative; }
+    .card-media img { width: 100%; height: 100%; object-fit: cover; }
+    .card-badge { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,.5); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,.1); color: #fff; padding: 6px 10px; border-radius: 999px; font-size: .8rem; font-weight: 700; }
+    .card-body { padding: 16px; display: grid; gap: 10px; }
+    .chip { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; font-weight:700; border:1px solid rgba(255,255,255,.12); background: var(--glass); color: var(--muted); font-size:.85rem; }
+    .chip svg { width:16px; height:16px; }
+    .card-title { font-weight: 800; font-size: 1.1rem; }
+    .meta { color: var(--muted); font-size: .95rem; }
+
+    /* Gallery */
+    .masonry { columns: 3 260px; column-gap: 16px; }
+    .masonry figure { break-inside: avoid; margin: 0 0 16px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); box-shadow: var(--shadow); }
+    .masonry img { width: 100%; height: auto; display: block; }
+
+    /* CTA Section */
+    .cta { background:
+      radial-gradient(800px 400px at 100% 10%, rgba(34,197,94,.15), transparent 50%),
+      radial-gradient(700px 300px at 0% 100%, rgba(6,182,212,.20), transparent 50%),
+      linear-gradient(180deg, var(--bg-soft), rgba(255,255,255,0));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: calc(var(--radius) + 6px);
+      padding: clamp(28px, 5vw, 48px);
+    }
+    .cta form { display: grid; grid-template-columns: 1fr auto; gap: 10px; margin-top: 14px; }
+    .input { width: 100%; background: var(--glass); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 12px 14px; color: var(--text); }
+    .input::placeholder { color: var(--muted); }
+    @media (max-width: 560px){ .cta form { grid-template-columns: 1fr; } }
+
+    /* FAQ */
+    details { background: var(--glass); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 14px 16px; }
+    details + details { margin-top: 10px; }
+    summary { cursor: pointer; font-weight: 700; }
+    summary::marker { color: var(--brand); }
+
+    /* Footer */
+    footer { border-top: 1px solid rgba(255,255,255,.08); background: rgba(0,0,0,.2); }
+
+    /* Floaters */
+    .whatsapp { position: fixed; right: 18px; bottom: 18px; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: #25D366; box-shadow: var(--shadow); z-index: 60; }
+    .to-top { position: fixed; right: 18px; bottom: 84px; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--glass); border: 1px solid rgba(255,255,255,.12); z-index: 60; opacity: 0; pointer-events: none; transition: .2s; }
+    .to-top.show { opacity: 1; pointer-events: auto; }
+
+    /* Reveal Animations */
+    .reveal { opacity: 0; transform: translateY(24px); transition: .6s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* Helper */
+    .muted { color: var(--muted); }
+    .divider { height: 1px; background: rgba(255,255,255,.08); margin: 26px 0; }
+    .badge { display:inline-block; padding: 4px 10px; border-radius: 999px; background: rgba(34,197,94,.15); border: 1px solid rgba(34,197,94,.35); color: #a7f3d0; font-weight: 700; font-size: .8rem; }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="brand" aria-label="Inicio tourcitosCR">
+        <span class="logo" aria-hidden="true">
+          <!-- Ícono 4x4 -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 13h2l2-3h5l2 3h5" stroke="#04120c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="7" cy="16.5" r="2.25" fill="#04120c"/>
+            <circle cx="18" cy="16.5" r="2.25" fill="#04120c"/>
+          </svg>
+        </span>
+        <span>tourcitosCR</span>
+      </a>
+
+      <button class="btn ghost menu-toggle" id="menuBtn" aria-label="Abrir menú">☰</button>
+
+      <div class="menu" id="menu">
+        <a href="#rutas">Rutas</a>
+        <a href="#galeria">Galería</a>
+        <a href="#beneficios">Beneficios</a>
+        <a href="#faq">FAQ</a>
+        <a href="#unete" class="btn primary">Únete al ride</a>
+        <button class="btn ghost" id="themeToggle" aria-label="Cambiar tema">🌙/☀️</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <div class="reveal in">
+        <span class="eyebrow">Comunidad 4x4 • Off‑road • Camping</span>
+        <h1 class="title">Explora Costa Rica fuera del asfalto con <span style="background: linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent;">tourcitosCR</span></h1>
+        <p class="subtitle">Somos una comunidad de vehículos 4x4 que arma rutas, viajes y campamentos. Desde travesías ligeras para principiantes hasta aventuras más técnicas para los amantes del barro.</p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#unete">Quiero unirme</a>
+          <a class="btn ghost" href="#rutas">Ver próximas rutas</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong id="statMiembros">+350</strong><span>Miembros activos</span></div>
+          <div class="stat"><strong id="statRutas">+120</strong><span>Rutas completadas</span></div>
+          <div class="stat"><strong id="statCamp">+85</strong><span>Noches de camping</span></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- RUTAS -->
+  <section id="rutas">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Próximas rutas</h2>
+          <p class="section-desc">Cupós limitados. Elige tu nivel y reserva tu espacio. Requisitos: 4x4 funcional, kit básico de seguridad y ganas de aventura.</p>
+        </div>
+        <a href="#unete" class="btn ghost">Reservar cupo</a>
+      </div>
+
+      <div class="grid cols-3 reveal">
+        <!-- Card 1 -->
+        <article class="card">
+          <div class="card-media">
+            <img alt="Ruta playa y río" src="https://th.bing.com/th/id/OIP.V8M4rFjs7ONCTXcQg5wx6gHaCN?w=326&h=104&c=7&r=0&o=5&pid=1.7" />
+            <span class="card-badge">Nivel: Fácil</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Río & Playa — Tárcoles</h3>
+            <div class="meta">Sábado 30 Ago • 7:00 AM • Punto: Peaje Atenas</div>
+            <div class="meta">Kilometraje: 90 km • Tiempo estimado: 6 h</div>
+            <div class="divider"></div>
+            <div class="chips">
+              <span class="chip" title="Terreno">
+                <!-- ícono montaña -->
+                <svg viewBox="0 0 24 24" fill="none"><path d="M3 18l7-10 4 6 3-4 4 8H3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+                Terreno mixto
+              </span>
+              <span class="chip" title="Camping opcional">⛺ Camping opcional</span>
+              <span class="chip" title="Cupo">25 cupos</span>
+            </div>
+          </div>
+        </article>
+        <!-- Card 2 -->
+        <article class="card">
+          <div class="card-media">
+            <img alt="Ruta barro y montaña" src="https://th.bing.com/th/id/OIP.Q7ETZCIdD5hT96GZm1mkMAHaEK?w=281&h=180&c=7&r=0&o=7&pid=1.7&rm=3" />
+            <span class="card-badge" style="background: rgba(239,68,68,.25); border-color: rgba(239,68,68,.5);">Nivel: Intermedio</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Barro & Bosque — Zona de Los Santos</h3>
+            <div class="meta">Domingo 07 Sep • 6:30 AM • Punto: Taras Cartago</div>
+            <div class="meta">Kilometraje: 110 km • Tiempo estimado: 7 h</div>
+            <div class="divider"></div>
+            <div class="chips">
+              <span class="chip">🧭 Navegación</span>
+              <span class="chip">🌧️ Posible lluvia</span>
+              <span class="chip">20 cupos</span>
+            </div>
+          </div>
+        </article>
+        <!-- Card 3 -->
+        <article class="card">
+          <div class="card-media">
+            <img alt="Ruta alta montaña" src="https://th.bing.com/th/id/OIP.abyqTy1eJ7DMX9alRymuZgHaFj?w=223&h=180&c=7&r=0&o=7&pid=1.7&rm=3" />
+            <span class="card-badge" style="background: rgba(245,158,11,.25); border-color: rgba(245,158,11,.5);">Nivel: Técnico</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Alta Montaña — Cerro de la Muerte</h3>
+            <div class="meta">Sábado 20 Sep • 6:00 AM • Punto: Mirador Chespiritos</div>
+            <div class="meta">Kilometraje: 70 km • Tiempo estimado: 8 h</div>
+            <div class="divider"></div>
+            <div class="chips">
+              <span class="chip">🪝 Winch recomendado</span>
+              <span class="chip">🛞 A/T o M/T</span>
+              <span class="chip">15 cupos</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFICIOS -->
+  <section id="beneficios">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">¿Por qué unirte a tourcitosCR?</h2>
+          <p class="section-desc">Conecta con gente tuanis, aprende rutas nuevas y disfruta de paisajes únicos. Seguridad, compañerismo y pura vida.</p>
+        </div>
+      </div>
+
+      <div class="grid cols-4 reveal">
+        <article class="card" style="padding: 18px;">
+          <h3 class="card-title">Rutas curadas</h3>
+          <p class="muted">Tracks probados con distintos niveles, ideal para principiantes o para quienes buscan algo más retador.</p>
+        </article>
+        <article class="card" style="padding: 18px;">
+          <h3 class="card-title">Comunidad activa</h3>
+          <p class="muted">Grupo unido, buena vibra y apoyo mecánico básico en ruta. Nadie se queda atrás.</p>
+        </article>
+        <article class="card" style="padding: 18px;">
+          <h3 class="card-title">Camping & naturaleza</h3>
+          <p class="muted">Noches bajo las estrellas, fogata y café chorreado con vista a la montaña o al mar.</p>
+        </article>
+        <article class="card" style="padding: 18px;">
+          <h3 class="card-title">Beneficios & descuentos</h3>
+          <p class="muted">Acceso a descuentos con talleres aliados, accesorios y seguros (si aplica).</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA -->
+  <section id="galeria">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Galería</h2>
+          <p class="section-desc">Un vistazo a nuestras últimas salidas.</p>
+        </div>
+      </div>
+      <div class="masonry reveal">
+        <figure><img alt="Offroad 1" src="c:\Users\AparicioYeiner\Downloads\WhatsApp Unknown 2025-08-21 at 11.43.35 AM\WhatsApp Image 2025-08-21 at 11.42.30 AM (1).jpeg"></figure>
+        <figure><img alt="Offroad 2" src="c:\Users\AparicioYeiner\Downloads\WhatsApp Unknown 2025-08-21 at 11.43.35 AM\WhatsApp Image 2025-08-21 at 11.42.30 AM.jpeg"></figure>
+        <figure><img alt="Offroad 3" src="c:\Users\AparicioYeiner\Downloads\WhatsApp Unknown 2025-08-21 at 11.43.35 AM\WhatsApp Image 2025-08-21 at 11.42.31 AM (1).jpeg"></figure>
+        <figure><img alt="Camping" src="c:\Users\AparicioYeiner\Downloads\WhatsApp Unknown 2025-08-21 at 11.43.35 AM\WhatsApp Image 2025-08-21 at 11.42.31 AM.jpeg"></figure>
+        <figure><img alt="Río" src="c:\Users\AparicioYeiner\Downloads\WhatsApp Unknown 2025-08-21 at 11.48.57 AM\WhatsApp Image 2025-08-21 at 11.48.13 AM.jpeg"></figure>
+        <figure><img alt="Playa" src="c:\Users\AparicioYeiner\Downloads\WhatsApp Unknown 2025-08-21 at 11.48.57 AM\WhatsApp Image 2025-08-21 at 11.48.14 AM.jpeg"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA ÚNETE -->
+  <section id="unete">
+    <div class="container">
+      <div class="cta reveal">
+        <span class="badge">Únete al ride</span>
+        <h3 class="section-title" style="margin: 8px 0 6px;">¿Listo para la próxima aventura?</h3>
+        <p class="section-desc">Déjanos tu correo y te enviamos el calendario mensual. También puedes escribirnos directo por WhatsApp.</p>
+        <form onsubmit="event.preventDefault(); alert('¡Listo! Te contactaremos pronto.'); this.reset();">
+          <input class="input" type="email" required placeholder="tu@correo.com" aria-label="Correo" />
+          <button class="btn primary" type="submit">Recibir rutas</button>
+        </form>
+        <div style="margin-top: 10px; display:flex; align-items:center; gap:10px; flex-wrap: wrap;">
+          <a class="btn ghost" href="https://wa.me/50670000000" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+          <a class="btn ghost" href="#faq">Requisitos y preguntas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Preguntas frecuentes</h2>
+          <p class="section-desc">Lo más consultado por quienes vienen por primera vez.</p>
+        </div>
+      </div>
+      <div class="grid cols-2 reveal">
+        <div>
+          <details open>
+            <summary>¿Necesito un 4x4 modificado?</summary>
+            <p class="muted">No necesariamente. Muchas rutas "Fácil" aceptan SUVs 4x4 stock con buenas llantas. Para niveles Intermedio/Técnico se recomiendan A/T o M/T y winch.</p>
+          </details>
+          <details>
+            <summary>¿Se permite venir con familia/mascotas?</summary>
+            <p class="muted">Sí, en salidas familiares lo indicamos en el anuncio. Por seguridad, sigue siempre las indicaciones de los guías.</p>
+          </details>
+        </div>
+        <div>
+          <details>
+            <summary>¿Qué equipo básico debo llevar?</summary>
+            <p class="muted">Gato hi-lift o hidráulico, manila/estropajo, guantes, compresor, botiquín, agua, radio (si tienes), y sentido común. Para camping: carpa, sleeping, luz y abrigo.</p>
+          </details>
+          <details>
+            <summary>¿Tiene costo participar?</summary>
+            <p class="muted">Algunas rutas son gratuitas; otras tienen un aporte logístico simbólico. Se detalla en cada publicación.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container" style="padding: 24px 0; display:flex; justify-content:space-between; align-items:center; gap: 12px; flex-wrap: wrap;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="logo" style="width:32px; height:32px; border-radius:10px; display:grid; place-items:center; background: linear-gradient(135deg, var(--brand), var(--brand-2));">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 13h2l2-3h5l2 3h5" stroke="#04120c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="16.5" r="2.25" fill="#04120c"/><circle cx="18" cy="16.5" r="2.25" fill="#04120c"/></svg>
+        </div>
+        <strong>tourcitosCR</strong>
+        <span class="muted">© <span id="year"></span> — Pura vida y barro 🛞</span>
+      </div>
+      <div style="display:flex; gap:10px;">
+        <a class="btn ghost" href="#">Instagram</a>
+        <a class="btn ghost" href="#">Facebook</a>
+        <a class="btn ghost" href="#">YouTube</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATERS -->
+  <a class="whatsapp" href="https://wa.me/50670000000" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20.52 3.48A11.94 11.94 0 0 0 12.01 0C5.4 0 .04 5.36.04 11.97c0 2.11.56 4.17 1.62 5.98L0 24l6.23-1.61a11.96 11.96 0 0 0 5.78 1.48h.01c6.6 0 11.96-5.36 11.96-11.97 0-3.21-1.25-6.22-3.46-8.42ZM12.01 21.8h-.01a9.82 9.82 0 0 1-5-1.37l-.36-.21-3.69.96.99-3.6-.23-.37a9.82 9.82 0 0 1-1.51-5.24C2.2 6.57 6.57 2.2 12 2.2a9.76 9.76 0 0 1 6.93 2.86 9.75 9.75 0 0 1 2.86 6.93c0 5.43-4.42 9.8-9.78 9.8Zm5.39-7.33c-.29-.15-1.72-.85-1.98-.95-.26-.1-.45-.15-.64.15s-.74.95-.9 1.15c-.16.19-.33.21-.62.07-.29-.15-1.23-.45-2.34-1.43-.86-.76-1.44-1.7-1.61-1.98-.17-.29-.02-.44.13-.59.14-.14.29-.36.43-.54.15-.18.19-.29.29-.48.1-.19.05-.36-.02-.52-.07-.15-.64-1.54-.88-2.11-.23-.56-.47-.48-.64-.49l-.54-.01c-.19 0-.5.07-.76.36s-.99.97-.99 2.37 1.02 2.75 1.16 2.94c.14.19 2 3.05 4.83 4.28.67.29 1.19.47 1.6.6.67.21 1.28.18 1.76.11.54-.08 1.72-.7 1.97-1.38.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34Z" fill="#04120c"/></svg>
+  </a>
+  <button class="to-top" id="toTop" aria-label="Subir">↑</button>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Año footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Menú móvil
+    const menuBtn = document.getElementById('menuBtn');
+    const menu = document.getElementById('menu');
+    menuBtn.addEventListener('click', () => menu.classList.toggle('open'));
+
+    // Theme toggle (dark / light)
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('tourcitos-theme');
+    if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    themeToggle.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('tourcitos-theme', next);
+    });
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target);} });
+    }, { threshold: 0.16 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Back to top
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) toTop.classList.add('show'); else toTop.classList.remove('show');
+    });
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Simple playful counters (static demo)
+    const animateNumber = (el, end, duration=2000) => {
+      const start = 0; const startTime = performance.now();
+      const step = (now) => {
+        const p = Math.min((now - startTime) / duration, 1);
+        el.textContent = Math.round(start + (end - start) * p).toLocaleString('es-CR');
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    animateNumber(document.getElementById('statMiembros'), 350);
+    animateNumber(document.getElementById('statRutas'), 120);
+    animateNumber(document.getElementById('statCamp'), 85);
+  </script>
+</body>
+</html>
